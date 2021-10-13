@@ -29,3 +29,28 @@ const player2 = {
         console.log(`${player2.name} Fight...`);
     }
 }
+
+function createPlayer() {
+    let $divPlayer1 = document.createElement('div');
+    $divPlayer1.classList.add('player1');
+    document.append($divPlayer1);
+
+    let $divProgressbar = document.createElement('div');
+    $divProgressbar.classList.add('progressbar');
+    $divPlayer1.append($divProgressbar);
+        let $divLife = document.createElement('div');
+        $divLife.classList.add('life');
+        $divLife.style.width = '100%';
+        $divProgressbar.append($divLife);
+        let $divName = document.createElement('div');
+        $divName.classList.add('name');
+        $divName.textContent = 'Kitana';
+        $divProgressbar.append($divName);
+
+    let $divCharacter = document.createElement('div');
+    $divCharacter.classList.add('character');
+    $divPlayer1.append($divCharacter);
+        let $characterImg = document.createElement('img');
+        $characterImg.src = `http://reactmarathon-api.herokuapp.com/assets/kitana.gif`;
+        $divCharacter.append($characterImg);
+}
