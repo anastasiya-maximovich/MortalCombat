@@ -30,26 +30,25 @@ function createElement(tag, className) {
 }
 
 function createPlayer(playerClass, playerObj) {
-    const $divPlayer1 = createElement('div', playerClass);
+    const $player = createElement('div', playerClass);
     const $divProgressbar = createElement('div','progressbar');
     const $divLife = createElement('div','life');
     const $divName = createElement('div', 'name');
     const $divCharacter = createElement('div', 'character');
     const $characterImg = createElement('img');
 
-
-    $arenas.appendChild($divPlayer1);
-
-    $divPlayer1.append($divProgressbar);
+    $player.append($divProgressbar);
     $divLife.style.width = playerObj.hp +'%';
     $divProgressbar.append($divLife);
     $divName.textContent = playerObj.name;
     $divProgressbar.append($divName);
 
-    $divPlayer1.append($divCharacter);
+    $player.append($divCharacter);
     $characterImg.src = playerObj.img;
     $divCharacter.append($characterImg);
+
+    return $player;
 }
 
-createPlayer('player1', player1);
-createPlayer('player2', player2);
+$arenas.appendChild(createPlayer('player1', player1));
+$arenas.appendChild(createPlayer('player2', player2));
