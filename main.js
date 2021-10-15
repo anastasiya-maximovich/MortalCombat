@@ -1,4 +1,5 @@
 const player1 = {
+    player: 1,
     name: 'Asja',
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
@@ -9,6 +10,7 @@ const player1 = {
 }
 
 const player2 = {
+    player: 2,
     name: 'Dominik',
     hp: 80,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
@@ -29,8 +31,8 @@ function createElement(tag, className) {
     return $tag;
 }
 
-function createPlayer(playerClass, playerObj) {
-    const $player = createElement('div', playerClass);
+function createPlayer(playerObj) {
+    const $player = createElement('div', 'player'+playerObj.player);
     const $divProgressbar = createElement('div','progressbar');
     const $divLife = createElement('div','life');
     const $divName = createElement('div', 'name');
@@ -50,5 +52,5 @@ function createPlayer(playerClass, playerObj) {
     return $player;
 }
 
-$arenas.appendChild(createPlayer('player1', player1));
-$arenas.appendChild(createPlayer('player2', player2));
+$arenas.appendChild(createPlayer(player1));
+$arenas.appendChild(createPlayer(player2));
