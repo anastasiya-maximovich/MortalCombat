@@ -20,29 +20,35 @@ const player2 = {
 
 const $arenas = document.querySelector('.arenas');
 
+function createElement(tag, className) {
+    const $tag = document.createElement(tag);
+
+    if(className) {
+        $tag.classList.add(className);
+    }
+    return $tag;
+}
+
 function createPlayer(playerClass, playerObj) {
-    const $divPlayer1 = document.createElement('div');
-    $divPlayer1.classList.add(playerClass);
+    const $divPlayer1 = createElement('div', playerClass);
+    const $divProgressbar = createElement('div','progressbar');
+    const $divLife = createElement('div','life');
+    const $divName = createElement('div', 'name');
+    const $divCharacter = createElement('div', 'character');
+    const $characterImg = createElement('img');
+
+
     $arenas.appendChild($divPlayer1);
 
-    const $divProgressbar = document.createElement('div');
-    $divProgressbar.classList.add('progressbar');
     $divPlayer1.append($divProgressbar);
-        const $divLife = document.createElement('div');
-        $divLife.classList.add('life');
-        $divLife.style.width = playerObj.hp +'%';
-        $divProgressbar.append($divLife);
-        const $divName = document.createElement('div');
-        $divName.classList.add('name');
-        $divName.textContent = playerObj.name;
-        $divProgressbar.append($divName);
+    $divLife.style.width = playerObj.hp +'%';
+    $divProgressbar.append($divLife);
+    $divName.textContent = playerObj.name;
+    $divProgressbar.append($divName);
 
-    const $divCharacter = document.createElement('div');
-    $divCharacter.classList.add('character');
     $divPlayer1.append($divCharacter);
-        const $characterImg = document.createElement('img');
-        $characterImg.src = playerObj.img;
-        $divCharacter.append($characterImg);
+    $characterImg.src = playerObj.img;
+    $divCharacter.append($characterImg);
 }
 
 createPlayer('player1', player1);
