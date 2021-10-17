@@ -57,7 +57,9 @@ function createPlayer(playerObj) {
 function changeHP(player){
     const $playerLife = document.querySelector('.player'+ player.player + ' .life');
 
-    player.hp -= 20;
+    const $randomHP = Math.ceil(Math.random() * 10);
+
+    player.hp -= $randomHP;
     $playerLife.style.width = player.hp + '%';
 
     if(player.hp <= 0){
@@ -75,8 +77,8 @@ function playerLose(name){
     return $loseTitle;
 }
 $randomButton.addEventListener('click', function(){
-    changeHP(player1);
     changeHP(player2);
+    changeHP(player1);
 })
 
 $arenas.appendChild(createPlayer(player1));
