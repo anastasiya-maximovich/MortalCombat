@@ -1,3 +1,5 @@
+const $randomButton = document.querySelector('.button');
+
 const player1 = {
     player: 1,
     name: 'Asja',
@@ -33,24 +35,36 @@ function createElement(tag, className) {
 
 function createPlayer(playerObj) {
     const $player = createElement('div', 'player'+playerObj.player);
-    const $divProgressbar = createElement('div','progressbar');
-    const $divLife = createElement('div','life');
-    const $divName = createElement('div', 'name');
-    const $divCharacter = createElement('div', 'character');
+    const $progressbar = createElement('div','progressbar');
+    const $life = createElement('div','life');
+    const $name = createElement('div', 'name');
+    const $character = createElement('div', 'character');
     const $characterImg = createElement('img');
 
-    $player.append($divProgressbar);
-    $divLife.style.width = playerObj.hp +'%';
-    $divProgressbar.append($divLife);
-    $divName.textContent = playerObj.name;
-    $divProgressbar.append($divName);
+    $player.append($progressbar);
+    $life.style.width = playerObj.hp +'%';
+    $progressbar.append($life);
+    $name.textContent = playerObj.name;
+    $progressbar.append($name);
 
-    $player.append($divCharacter);
+    $player.append($character);
     $characterImg.src = playerObj.img;
-    $divCharacter.append($characterImg);
+    $character.append($characterImg);
 
     return $player;
 }
+
+function changeHP(player) {
+    const $playerLife = document.querySelector('.player'+ player.player + ' .life');
+
+    player.hp -= 20;
+    $playerLife.style.width = player.hp + '%';
+}
+
+$randomButton.addEventListener('click', function(){
+    changeHP(player2);
+    changeHP(player1);
+})
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
