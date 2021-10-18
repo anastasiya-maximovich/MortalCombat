@@ -57,19 +57,19 @@ function createPlayer(playerObj) {
 function changeHP(player){
     const $playerLife = document.querySelector('.player'+ player.player + ' .life');
 
-    const $randomHP = Math.ceil(Math.random() * 10);
-
-    player.hp -= $randomHP;
+    player.hp -= $randomHP();
     $playerLife.style.width = player.hp + '%';
 
     if(player.hp <= 0){
         player.hp = 0;
 
         $randomButton.disabled = true;
-        $arenas.appendChild(playerLose(player1.hp === 0? player2.name : player1.name));
+        $arenas.appendChild(playerLose(player1.hp === 0 ? player2.name : player1.name));
     }
 
 }
+
+const $randomHP = () => Math.ceil(Math.random() * 10);
 
 function playerLose(name){
     const $loseTitle = createElement('div', 'loseTitle');
