@@ -1,4 +1,5 @@
 const $randomButton = document.querySelector('.button');
+const $arenas = document.querySelector('.arenas');
 
 const player1 = {
     player: 1,
@@ -21,8 +22,6 @@ const player2 = {
         console.log(`${player2.name} Fight...`);
     }
 }
-
-const $arenas = document.querySelector('.arenas');
 
 function createElement(tag, className) {
     const $tag = document.createElement(tag);
@@ -62,24 +61,39 @@ function changeHP(player){
 
     if(player.hp <= 0){
         player.hp = 0;
-
-        $randomButton.disabled = true;
-        $arenas.appendChild(playerLose(player1.hp === 0 ? player2.name : player1.name));
     }
 
 }
 
 const $randomHP = () => Math.ceil(Math.random() * 10);
 
-function playerLose(name){
-    const $loseTitle = createElement('div', 'loseTitle');
+function playerWins(name){
+    const $winTitle = createElement('div', 'loseTitle');
+    if(name) {
+            $winTitle.textContent = name + ' win!';
+    } else {
+        $winTitle.textContent = 'Draw!';
+    }
 
-    $loseTitle.textContent = name + ' win!';
-    return $loseTitle;
+    return $winTitle;
 }
+
 $randomButton.addEventListener('click', function(){
     changeHP(player2);
     changeHP(player1);
+
+    if(player1.hp === 0 || player2.hp ===0){
+        $randomButton.disabled = true;
+    } 
+    
+    if (player1.hp === 0 && player1.hp < player2.hp){
+        $arenas.appendChild(playerWins(player2.name))
+    }else if (player2.hp === 0 && player2.hp < player1.hp){
+        $arenas.appendChild(playerWins(player1.name))
+    }else if (player1.hp === 0 && player2.hp === 0){
+        $arenas.appendChild(playerWins())
+    } 
+
 })
 
 $arenas.appendChild(createPlayer(player1));
