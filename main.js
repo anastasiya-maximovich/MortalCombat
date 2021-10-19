@@ -116,13 +116,20 @@ $randomButton.addEventListener('click', function(){
 
 })
 
-// function createReloadButton() {
-//     const $restartDiv = createElement('div', 'reloadWrap');
-//     const $restartButton = createElement('button', 'button');
-//     $restartButton.textContent = 'Restart';
-//     $restartDiv.append($restartButton);
-// }
+function createReloadButton() {
+    const $restartDiv = createElement('div', 'reloadWrap');
+    const $restartButton = createElement('button', 'button');
+    $restartButton.textContent = 'Restart';
+    $restartDiv.style.zIndex = '1000';
+    $restartDiv.append($restartButton);
+
+    return $restartDiv
+}
+
+createReloadButton().addEventListener('click', function(){
+    window.location.reload();
+})
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
-// $arenas.appendChild(createReloadButton());
+$arenas.appendChild(createReloadButton());
