@@ -133,3 +133,4 @@ createReloadButton().addEventListener('click', function(){
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
 $arenas.appendChild(createReloadButton());
+
