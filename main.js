@@ -1,5 +1,12 @@
-const $randomButton = document.querySelector('.button');
+// const $randomButton = document.querySelector('.button');
 const $arenas = document.querySelector('.arenas');
+const $formFight = document.querySelector('.control');
+const HIT = {
+    head: 30,
+    body: 25,
+    foot: 20,
+}
+const ATTACK = ['head', 'body', 'foot'];
 
 const player1 = {
     player: 1,
@@ -28,9 +35,6 @@ const player2 = {
 function attack() {
    return this.name + ' Fight...!';
 }
-
-console.log(player1.attack());
-console.log(player2.attack());
 
 function createElement(tag, className) {
     const $tag = document.createElement(tag);
@@ -62,12 +66,12 @@ function createPlayer(playerObj) {
     return $player;
 }
 
-function randomHP(count) {
+function getRandom(count) {
     return Math.ceil(Math.random() * count);
 }
 
 function changeHP(count){
-    this.hp -= randomHP(count);
+    this.hp -= getRandom(count);
 
     if(this.hp <= 0){
         this.hp = 0;
@@ -94,28 +98,28 @@ function playerWins(name){
     return $winTitle;
 }
 
-$randomButton.addEventListener('click', function(event){
-    player1.changeHP(randomHP(20));
-    player2.changeHP(randomHP(20));
-    player1.elHP();
-    player2.elHP();
-    player1.renderHP();
-    player2.renderHP();
+// $randomButton.addEventListener('click', function(event){
+//     player1.changeHP(randomHP(20));
+//     player2.changeHP(randomHP(20));
+//     player1.elHP();
+//     player2.elHP();
+//     player1.renderHP();
+//     player2.renderHP();
 
-    if(player1.hp === 0 || player2.hp ===0){
-        $randomButton.disabled = true;
-        createReloadButton();
-    } 
+//     if(player1.hp === 0 || player2.hp ===0){
+//         $randomButton.disabled = true;
+//         createReloadButton();
+//     } 
     
-    if (player1.hp === 0 && player1.hp < player2.hp){
-        $arenas.appendChild(playerWins(player2.name))
-    }else if (player2.hp === 0 && player2.hp < player1.hp){
-        $arenas.appendChild(playerWins(player1.name))
-    }else if (player1.hp === 0 && player2.hp === 0){
-        $arenas.appendChild(playerWins())
-    } 
+//     if (player1.hp === 0 && player1.hp < player2.hp){
+//         $arenas.appendChild(playerWins(player2.name))
+//     }else if (player2.hp === 0 && player2.hp < player1.hp){
+//         $arenas.appendChild(playerWins(player1.name))
+//     }else if (player1.hp === 0 && player2.hp === 0){
+//         $arenas.appendChild(playerWins())
+//     } 
 
-})
+// })
 
 function createReloadButton() {
     const $restartDiv = createElement('div', 'reloadWrap');
@@ -130,13 +134,9 @@ function createReloadButton() {
     $arenas.appendChild($restartDiv);
 }
 
-$arenas.appendChild(createPlayer(player1));
-$arenas.appendChild(createPlayer(player2));
-
-const $form = document.querySelector('.control');
-
-
 $form.addEventListener('submit', function(event){
     event.preventDefault();
+});
 
-})
+$arenas.appendChild(createPlayer(player1));
+$arenas.appendChild(createPlayer(player2));
