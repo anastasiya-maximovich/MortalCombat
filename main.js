@@ -7,10 +7,10 @@ const player1 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/sonya.gif',
     weapon: ['katana', 'fan', 'charm'],
-    attack: fight,
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP
+    attack,
+    changeHP,
+    elHP,
+    renderHP
 }
 
 const player2 = {
@@ -19,13 +19,13 @@ const player2 = {
     hp: 100,
     img: 'http://reactmarathon-api.herokuapp.com/assets/scorpion.gif',
     weapon: ['poison', 'quick attack', 'death grip'],
-    attack: fight,
-    changeHP: changeHP,
-    elHP: elHP,
-    renderHP: renderHP
+    attack,
+    changeHP,
+    elHP,
+    renderHP
 }
 
-function fight() {
+function attack() {
    return this.name + ' Fight...!';
 }
 
@@ -94,7 +94,7 @@ function playerWins(name){
     return $winTitle;
 }
 
-$randomButton.addEventListener('click', function(){
+$randomButton.addEventListener('click', function(event){
     player1.changeHP(randomHP(20));
     player2.changeHP(randomHP(20));
     player1.elHP();
@@ -134,3 +134,18 @@ $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
 $arenas.appendChild(createReloadButton());
 
+const $form = document.querySelector('.control');
+
+
+$form.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    for(let i = 0 ; i < $form.length; i++){
+    let item = $form[i];
+    console.dir(item);
+    console.log('###: id ', item.id);
+    console.log('###: name ', item.name);
+    console.log('###: type ',  item.type);
+    console.log('###: value ', item.value);
+} 
+})
