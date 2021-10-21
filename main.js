@@ -104,6 +104,7 @@ $randomButton.addEventListener('click', function(event){
 
     if(player1.hp === 0 || player2.hp ===0){
         $randomButton.disabled = true;
+        createReloadButton();
     } 
     
     if (player1.hp === 0 && player1.hp < player2.hp){
@@ -120,19 +121,17 @@ function createReloadButton() {
     const $restartDiv = createElement('div', 'reloadWrap');
     const $restartButton = createElement('button', 'button');
     $restartButton.textContent = 'Restart';
-    $restartDiv.style.zIndex = '1000';
+
+    $restartButton.addEventListener('click', function(){
+        window.location.reload();
+    })
+
     $restartDiv.append($restartButton);
-
-    return $restartDiv
+    $arenas.appendChild($restartDiv);
 }
-
-createReloadButton().addEventListener('click', function(){
-    window.location.reload();
-})
 
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
-$arenas.appendChild(createReloadButton());
 
 const $form = document.querySelector('.control');
 
@@ -140,12 +139,4 @@ const $form = document.querySelector('.control');
 $form.addEventListener('submit', function(event){
     event.preventDefault();
 
-    for(let i = 0 ; i < $form.length; i++){
-    let item = $form[i];
-    console.dir(item);
-    console.log('###: id ', item.id);
-    console.log('###: name ', item.name);
-    console.log('###: type ',  item.type);
-    console.log('###: value ', item.value);
-} 
 })
