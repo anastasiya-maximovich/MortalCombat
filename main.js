@@ -106,19 +106,7 @@ function playerWins(name){
 //     player1.renderHP();
 //     player2.renderHP();
 
-//     if(player1.hp === 0 || player2.hp ===0){
-//         $randomButton.disabled = true;
-//         createReloadButton();
-//     } 
-    
-//     if (player1.hp === 0 && player1.hp < player2.hp){
-//         $arenas.appendChild(playerWins(player2.name))
-//     }else if (player2.hp === 0 && player2.hp < player1.hp){
-//         $arenas.appendChild(playerWins(player1.name))
-//     }else if (player1.hp === 0 && player2.hp === 0){
-//         $arenas.appendChild(playerWins())
-//     } 
-
+//     
 // })
 
 function createReloadButton() {
@@ -149,8 +137,52 @@ function enemyAttack() {
 
 }
 
+function playerAttack(){
+    const attack = {};
+
+    for(let item of $formFight){
+        if(item.checked && item.name === 'hit'){
+            attack.value = getRandom(HIT[item.value]);
+            attack.hit = item.value;
+        }
+
+        if(item.checked && item.name === 'defence') {
+            attack.defence = item.value;
+        }
+
+        item.checked = false;
+    }
+    return attack;
+}
+function showResult() {
+    if(player1.hp === 0 || player2.hp ===0){
+        $randomButton.disabled = true;
+        createReloadButton();
+    } 
+            
+    if (player1.hp === 0 && player1.hp < player2.hp){
+        $arenas.appendChild(playerWins(player2.name))
+    }else if (player2.hp === 0 && player2.hp < player1.hp){
+        $arenas.appendChild(playerWins(player1.name))
+    }else if (player1.hp === 0 && player2.hp === 0){
+        $arenas.appendChild(playerWins())
+    }     
+}
+
 $formFight.addEventListener('submit', function(event){
     event.preventDefault();
     const enemy = enemyAttack();
-    console.log("enemy: ", enemy)
+    const player = playerAttack();
+
+    if(player.defence !== enemy.hit){
+        player1.changeHP(enemy.value);
+        player1.renderHP();
+    }
+
+    if(enemy.defence !== player.hit){
+        player2.changeHP(player.value);
+        player2.renderHP();
+    }
+
+    showResult();
 });
