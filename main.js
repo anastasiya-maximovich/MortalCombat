@@ -134,9 +134,23 @@ function createReloadButton() {
     $arenas.appendChild($restartDiv);
 }
 
-$form.addEventListener('submit', function(event){
-    event.preventDefault();
-});
-
 $arenas.appendChild(createPlayer(player1));
 $arenas.appendChild(createPlayer(player2));
+
+function enemyAttack() {
+    const hit = ATTACK[getRandom(3) - 1];
+    const defence = ATTACK[getRandom(3) - 1];
+
+   return {
+       value: getRandom(HIT[hit]),
+       hit,
+       defence,
+   }
+
+}
+
+$formFight.addEventListener('submit', function(event){
+    event.preventDefault();
+    const enemy = enemyAttack();
+    console.log("enemy: ", enemy)
+});
