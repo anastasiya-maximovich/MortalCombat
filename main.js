@@ -208,6 +208,11 @@ function showResult() {
     }     
 }
 
+function generateLog(type, player1, player2){
+    const text = logs[type][getRandom((type.length)-1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
+    console.log(text);
+}
+
 $formFight.addEventListener('submit', function(event){
     event.preventDefault();
     const enemy = enemyAttack();
@@ -216,12 +221,15 @@ $formFight.addEventListener('submit', function(event){
     if(player.defence !== enemy.hit){
         player1.changeHP(enemy.value);
         player1.renderHP();
+        generateLog('hit', player2, player1);
     }
 
     if(enemy.defence !== player.hit){
         player2.changeHP(player.value);
         player2.renderHP();
+        generateLog('defence', player1, player2)
     }
 
     showResult();
 });
+
