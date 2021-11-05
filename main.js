@@ -1,6 +1,8 @@
 // const $randomButton = document.querySelector('.button');
 const $arenas = document.querySelector('.arenas');
 const $formFight = document.querySelector('.control');
+const $chat = document.querySelector('.chat');
+
 const HIT = {
     head: 30,
     body: 25,
@@ -210,7 +212,8 @@ function showResult() {
 
 function generateLog(type, player1, player2){
     const text = logs[type][getRandom((type.length)-1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
-    console.log(text);
+    const el = `<p>${text}</p>`
+    $chat.insertAdjacentHTML('afterbegin', el);
 }
 
 $formFight.addEventListener('submit', function(event){
@@ -227,7 +230,7 @@ $formFight.addEventListener('submit', function(event){
     if(enemy.defence !== player.hit){
         player2.changeHP(player.value);
         player2.renderHP();
-        generateLog('defence', player1, player2)
+        generateLog('hit', player1, player2)
     }
 
     showResult();
