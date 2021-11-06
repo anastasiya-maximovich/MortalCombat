@@ -211,9 +211,35 @@ function showResult() {
 }
 
 function generateLog(type, player1, player2){
-    const text = logs[type][getRandom((type.length)-1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
-    const el = `<p>${text}</p>`
+    let text = '';
+
+    switch (type){
+        case 'start':
+        text = logs[type].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
+        break;
+
+        case 'hit':
+        text = logs[type][getRandom((type.length)-1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
+        break;
+
+        case 'defence':
+        text = logs[type][getRandom((type.length)-1)].replace('[playerKick]', player1.name).replace('[playerDefence]', player2.name);
+        break;
+
+        case 'draw':
+        text = logs[type];
+        break;
+
+        case 'default':
+        text = 'Что-то пошло не так!';
+        break;
+    }
+
+    const date = new Date();
+    const currentTime = date.toLocaleTimeString();
+    const el = `<p>${currentTime} ${text}</p>`
     $chat.insertAdjacentHTML('afterbegin', el);
+
 }
 
 $formFight.addEventListener('submit', function(event){
@@ -225,12 +251,18 @@ $formFight.addEventListener('submit', function(event){
         player1.changeHP(enemy.value);
         player1.renderHP();
         generateLog('hit', player2, player1);
+    }else {
+        generateLog('defense', player2, player1);
+
     }
 
     if(enemy.defence !== player.hit){
         player2.changeHP(player.value);
         player2.renderHP();
         generateLog('hit', player1, player2)
+    }else {
+        generateLog('defence', player1, player2);
+
     }
 
     showResult();
