@@ -254,7 +254,7 @@ function generateLog(type, { name } = {}, { name: playerName2, hp } = {}, valueA
 
     switch(type) {
         case 'hit':
-            text = `${getTime()} ${text} -${valueAttack} [${player2.hp}/100]`;
+            text = `${getTime()} ${text} -${valueAttack} [${hp}/100]`;
             break;
         case 'defence':
         case 'end':
@@ -265,6 +265,7 @@ function generateLog(type, { name } = {}, { name: playerName2, hp } = {}, valueA
     const el = `<p>${getTextLog()}</p>`
     $chat.insertAdjacentHTML('afterbegin', el);
 
+    console.log(text)
 }
 
 $formFight.addEventListener('submit', function(event){
